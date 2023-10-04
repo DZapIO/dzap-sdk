@@ -69,7 +69,7 @@ const request = [
   },
 ]
 
-const result = await client.getQuoteRate(request);
+const result = await getQuoteRate(request);
 ```
 
 This function returns a Promise that resolves to an array of quote rates.
@@ -79,7 +79,7 @@ This function returns a Promise that resolves to an array of quote rates.
 To use the **`getAllSupportedChains`** function, simply call it like this:
 
 ```jsx
-const result = await client.getAllSupportedChains();
+const result = await getAllSupportedChains();
 ```
 
 This function returns a Promise that resolves to an array of all supported chains.
@@ -89,7 +89,7 @@ This function returns a Promise that resolves to an array of all supported chain
 To use the **`swap`** function, you need to pass an array of **`SwapRequest`** objects and the **`recipient`** address, like this:
 
 ```jsx
-const result = await client.swap(request, recipient);
+const result = await swap(request, recipient);
 ```
 
 This function returns a Promise that resolves to the transaction hash for the swap transaction.

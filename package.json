@@ -1,5 +1,5 @@
 {
-  "name": "@hopevik/dzap-sdk",
+  "name": "@dzap/dzap-sdk",
   "version": "1.0.6",
   "description": "This project is a thin React wrapper around DZap, to easily call functionalities/contract integration.",
   "main": "dist/index.js",
