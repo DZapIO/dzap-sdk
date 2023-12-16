@@ -7,7 +7,7 @@ import {
 
 function useClient({ chainId }: { chainId: number }) {
   const getQuoteRate = async (request: QuoteRateRequest) => {
-    return await fetchQuoteRate(request);
+    return await fetchQuoteRate(request, null);
   };
 
   const getSwapParams = (request: SwapParamRequest) => {
