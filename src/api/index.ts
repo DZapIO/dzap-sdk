@@ -5,9 +5,9 @@ import {
   BATCH_SWAP_QUOTE_URL,
   BATCH_SWAP_SUPPORTED_CHAINS_URL,
   GET_ALL_TOKENS_URL,
-} from 'src/constants/urlConstants';
-import { GET, POST } from 'src/constants/httpMethods';
-import { invoke } from 'src/utils/axios';
+} from '../constants/urlConstants';
+import { GET, POST } from '../constants/httpMethods';
+import { invoke } from '../utils/axios';
 import { Signer } from 'ethers';
 
 export const fetchQuoteRate = (request: QuoteRateRequest, cancelToken: CancelToken) =>

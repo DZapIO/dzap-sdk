@@ -1,6 +1,6 @@
 import { BigNumber, ethers, Signer } from 'ethers';
-import { SWAP_CONTRACTS } from 'src/config';
-import { SwapParamRequest } from 'src/types';
+import { SWAP_CONTRACTS } from '../config';
+import { SwapParamRequest } from '../types';
 import { Contract } from 'zksync-web3';
 import { fetchSwapParams } from '../api';
 import { getChecksumAddress, purgeSwapVersion } from '../utils';

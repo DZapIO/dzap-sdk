@@ -1,13 +1,14 @@
 import Axios, { CancelToken, Method } from 'axios';
-import { baseUrl } from 'src/config';
-import { POST } from 'src/constants/httpMethods';
+import { baseUrl } from '../config';
+import { POST , GET} from '../constants/httpMethods';
 
 export const invoke = async (endpoint: string, data: any, method?: Method, cancelToken?: CancelToken): Promise<any> => {
   const url = `${baseUrl}${endpoint}`;
   return Axios({
     method: method || POST,
     url,
-    data,
+    data: method === GET ? undefined : data,
+    params: method === GET ? data : undefined,
     cancelToken,
   })
     .then(({ data }) => data)
