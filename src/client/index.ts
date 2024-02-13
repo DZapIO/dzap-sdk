@@ -8,7 +8,7 @@ class DzapClient {
   private cancelTokenSource: CancelTokenSource | null = null;
   private provider: Signer = null;
 
-  private constructor() {}
+  private constructor() { }
 
   // Static method to control the access to the singleton instance.
   public static getInstance(): DzapClient {
@@ -39,12 +39,12 @@ class DzapClient {
     return await fetchAllTokens(chainId, source, account);
   }
 
-  public async getTokenDetails(tokenAddress: string,chainId:number){
-    return await fetchTokenDetails(tokenAddress,chainId)
+  public async getTokenDetails(tokenAddress: string, chainId: number) {
+    return await fetchTokenDetails(tokenAddress, chainId)
   }
-  
-  public async getTokenPrice(tokenAddresses: string[],chainId:number){
-    return await fetchTokenPrice(tokenAddresses,chainId)
+
+  public async getTokenPrice(tokenAddresses: string[], chainId: number) {
+    return await fetchTokenPrice(tokenAddresses, chainId)
   }
 
   public swapTokens = ({ request, provider }: { request: SwapParamRequest; provider: Signer }) => {
