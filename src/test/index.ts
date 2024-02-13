@@ -98,3 +98,29 @@
 //   }
 //   console.log(response);
 // })();
+
+
+// (async () => {
+//   let response
+//   try {
+//     console.log("fetchTokenDetails")
+//     response = await dzapClient.getTokenDetails('0xf59036CAEBeA7dC4b86638DFA2E3C97dA9FcCd40',137);
+//   } catch (error) {
+//     console.log(error)
+//   }
+//       console.log({ response });
+
+// })()
+
+
+// (async () => {
+//   let response
+//   try {
+//     console.log("fetchTokenPrice")
+//     response = await dzapClient.getTokenPrice(['0xf59036CAEBeA7dC4b86638DFA2E3C97dA9FcCd40'],137);
+//   } catch (error) {
+//     console.log(error)
+//   }
+//       console.log({ response });
+
+// })()
