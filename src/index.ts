@@ -1,5 +1,4 @@
 import DzapClient from './client';
-import useContract from './hooks/useContract';
 import {
   GetSwapParamsResponse,
   ChainData,
@@ -26,7 +25,6 @@ export default DzapClient;
 
 export {
   HexString,
-  useContract,
   ChainData,
   Chain,
   ApiRpcResponse,

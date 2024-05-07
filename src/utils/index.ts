@@ -1,3 +1,4 @@
+import { Signer } from 'ethers';
 import { Chains, batchSwapIntegrators, defaultBridgeVersion, defaultSwapVersion } from '../config';
 import { HexString } from '../types';
 import { createPublicClient, getAddress, http, stringToHex } from 'viem';
@@ -41,4 +42,10 @@ export const getTrxId = (account: string) => {
 
   const uuidInBytes = stringToHex(uuid, { size: 32 });
   return uuidInBytes;
+};
+
+export const estimateGasMultiplier = BigInt(15) / BigInt(10); // .toFixed(0);
+
+export const isTypeSigner = (variable): variable is Signer => {
+  return variable instanceof Signer;
 };

@@ -10,6 +10,7 @@ electron-builder.yml
 /.yalc
 yalc.lock
 yarn.lock
+package*.json
 # testing
 /coverage/
 src/types/contracts/

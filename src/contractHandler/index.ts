@@ -1,19 +1,34 @@
+import { initializeReadOnlyProvider, isTypeSigner, purgeBridgeVersion, purgeSwapVersion } from '../utils';
+import { handleTransactionError } from '../utils/errors';
+import { decodeFunctionData, WalletClient } from 'viem';
+import { SwapParamsRequest, BridgeParamsRequest, HexString, BridgeParamsResponse } from '../types';
 import { BRIDGE_ABIS, Chains, SWAP_ABIS } from 'src/config';
-import { SwapParamsRequest, HexString, BridgeParamsRequest, BridgeParamsResponse } from 'src/types';
-import { fetchBridgeParams, fetchSwapParams } from '../api';
-import { initializeReadOnlyProvider, purgeBridgeVersion, purgeSwapVersion } from '../utils';
-import { WalletClient, decodeFunctionData } from 'viem';
 import { Signer } from 'ethers';
-import { handleTransactionError } from 'src/utils/errors';
+import { fetchBridgeParams, fetchSwapParams } from 'src/api';
 
-export const estimateGasMultiplier = BigInt(15) / BigInt(10); // .toFixed(0);
+class ContractHandler {
+  private static instance: ContractHandler;
 
-function isTypeSigner(variable: any): variable is Signer {
-  return variable instanceof Signer;
-}
+  // private constructor() {}
 
-function useContract({ chainId, rpcProvider, signer }: { chainId: number; rpcProvider: string; signer: WalletClient | Signer; clientId?: number }) {
-  const swap = async ({ request }: { request: SwapParamsRequest }) => {
+  public static getInstance(): ContractHandler {
+    if (!ContractHandler.instance) {
+      ContractHandler.instance = new ContractHandler();
+    }
+    return ContractHandler.instance;
+  }
+
+  public async handleSwap({
+    chainId,
+    rpcProvider,
+    signer,
+    request,
+  }: {
+    chainId: number;
+    rpcProvider: string;
+    signer: WalletClient | Signer;
+    request: SwapParamsRequest;
+  }) {
     const purgedVersion = purgeSwapVersion();
     const abi = SWAP_ABIS[purgedVersion].abi;
     try {
@@ -61,9 +76,19 @@ function useContract({ chainId, rpcProvider, signer }: { chainId: number; rpcPro
     } catch (error: any) {
       handleTransactionError({ abi, error });
     }
-  };
+  }
 
-  const bridge = async ({ request }: { request: BridgeParamsRequest[] }) => {
+  public async handleBridge({
+    chainId,
+    rpcProvider,
+    signer,
+    request,
+  }: {
+    chainId: number;
+    rpcProvider: string;
+    signer: WalletClient | Signer;
+    request: BridgeParamsRequest[];
+  }) {
     const purgedVersion = purgeBridgeVersion();
     const abi = BRIDGE_ABIS[purgedVersion].abi;
     try {
@@ -109,10 +134,7 @@ function useContract({ chainId, rpcProvider, signer }: { chainId: number; rpcPro
     } catch (error: any) {
       handleTransactionError({ abi, error });
     }
-  };
-  return {
-    swap,
-    bridge,
-  };
+  }
 }
-export default useContract;
+
+export default ContractHandler;

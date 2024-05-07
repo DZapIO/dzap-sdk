@@ -20,13 +20,17 @@ import {
   swapTokensApi,
 } from '../api';
 import { Signer } from 'ethers';
+import { WalletClient } from 'viem';
+import ContractHandler from 'src/contractHandler';
 
 class DzapClient {
   private static instance: DzapClient;
   private cancelTokenSource: CancelTokenSource | null = null;
-  private provider: Signer = null;
+  private contractHandler: ContractHandler;
 
-  // private constructor() {}
+  private constructor() {
+    this.contractHandler = ContractHandler.getInstance();
+  }
 
   // Static method to control the access to the singleton instance.
   public static getInstance(): DzapClient {
@@ -80,6 +84,34 @@ class DzapClient {
   public swapTokens = ({ request, provider }: { request: SwapParamsRequest; provider: Signer }) => {
     return swapTokensApi({ request, provider });
   };
+
+  public async swap({
+    chainId,
+    rpcProvider,
+    signer,
+    request,
+  }: {
+    chainId: number;
+    rpcProvider: string;
+    signer: WalletClient | Signer;
+    request: SwapParamsRequest;
+  }) {
+    await this.contractHandler.handleSwap({ chainId, rpcProvider, signer, request });
+  }
+
+  public async bridge({
+    chainId,
+    rpcProvider,
+    signer,
+    request,
+  }: {
+    chainId: number;
+    rpcProvider: string;
+    signer: WalletClient | Signer;
+    request: BridgeParamsRequest[];
+  }) {
+    await this.contractHandler.handleBridge({ chainId, rpcProvider, signer, request });
+  }
 }
 
 export default DzapClient;
