@@ -14,9 +14,6 @@ export const invoke = async (endpoint: string, data: any, method?: Method, cance
   })
     .then((res) => res.data)
     .catch((error) => {
-      if (Axios.isCancel(error)) {
-        return Promise.resolve({});
-      }
       return Promise.reject(error);
     });
 };
