@@ -1,5 +1,5 @@
 import { createWalletClient, http } from 'viem';
-import useContract from '../hooks/useContract';
+import DzapClient from 'src/client';
 // import { ethers } from 'ethers';
 import { privateKeyToAccount } from 'viem/accounts';
 import { SwapParamsRequest } from 'src/types';
@@ -89,9 +89,9 @@ export async function TestHook() {
     account: account,
     transport: http(rpcProvider),
   });
-  const { swap } = useContract({ chainId: 42161, rpcProvider, signer: client });
+  const dzapClient = DzapClient.getInstance();
   try {
-    const resp = await swap({ request: paramRequest });
+    const resp = await dzapClient.swap({ chainId: 42161, rpcProvider, signer: client, request: paramRequest });
     console.log(resp);
   } catch (e) {
     console.log('Test Error');
