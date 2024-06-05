@@ -1,4 +1,5 @@
 // import { createWalletClient, http } from 'viem';
+import { Wallet } from 'ethers';
 import DzapClient from 'src/client';
 // import { ethers } from 'ethers';
 // import { privateKeyToAccount } from 'viem/accounts';
@@ -87,7 +88,8 @@ export async function TestHook() {
   const rpcProvider = 'https://arb1.arbitrum.io/rpc';
   const dzapClient = DzapClient.getInstance();
   try {
-    const resp = await dzapClient.swap({ chainId: 42161, rpcProvider, request: paramRequest });
+    const signer = new Wallet('0x');
+    const resp = await dzapClient.swap({ chainId: 42161, rpcProvider, request: paramRequest, signer });
     console.log(resp);
   } catch (e) {
     console.log('Test Error');
