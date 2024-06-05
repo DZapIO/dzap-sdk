@@ -1,7 +1,7 @@
 import { Signer } from 'ethers';
 import { createPublicClient, getAddress, http, stringToHex } from 'viem';
 import * as allWagmiChains from 'viem/chains';
-import { Chains, batchSwapIntegrators, defaultBridgeVersion, defaultSwapVersion } from '../config';
+import { batchSwapIntegrators, defaultBridgeVersion, defaultSwapVersion } from '../config';
 import { HexString } from '../types';
 
 export const wagmiChainsById: Record<number, allWagmiChains.Chain> = Object.values(allWagmiChains).reduce((acc, chainData) => {
@@ -21,7 +21,7 @@ export const purgeBridgeVersion = (version?: string) => version || defaultBridge
 
 export const initializeReadOnlyProvider = ({ chainId, rpcProvider }: { rpcProvider: string; chainId: number }) => {
   return createPublicClient({
-    chain: Chains[chainId],
+    chain: wagmiChainsById[chainId],
     transport: http(rpcProvider),
   });
 };

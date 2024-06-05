@@ -1,7 +1,6 @@
+import { Abi } from 'viem';
 import { abi as swapAbiV2 } from '../artifacts/v2/DZapAggregator';
 import { abi as bridgeAbiV2 } from '../artifacts/v2/DZapCore';
-import { Abi, Chain } from 'viem';
-import { mainnet, arbitrum, bsc, optimism, polygon, zkSync } from 'viem/chains';
 import { AppEnv } from './AppEnv';
 const { REACT_APP_ENV, REACT_APP_BASE_API_URL } = process.env;
 
@@ -49,13 +48,4 @@ export const batchSwapIntegrators: {
   dZap: {
     contract: '0x12480616436DD6D555f88B8d94bB5156E28825B1',
   },
-};
-
-export const Chains: { [key: number]: Chain } = {
-  1: mainnet,
-  10: optimism,
-  56: bsc,
-  137: polygon,
-  42161: arbitrum,
-  324: zkSync,
 };
